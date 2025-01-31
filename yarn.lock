@@ -4102,6 +4102,11 @@
   resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.13.1.tgz#07e2a8006f23a3bc898b3f317e0a58cc8076b86e"
   integrity sha512-so+DHzZKsoOcoXrILB4rqDkMDy7NLMErRdOxvzvOKb507YINKUP4Di+shbTZDhSE/pBZ+vr7XGIpcOO0VLSA+Q==
 
+"@rokmohar/pushover-types@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@rokmohar/pushover-types/-/pushover-types-1.2.3.tgz#2ff044b41455b79c8690d62ed7d9e82c6c2876ac"
+  integrity sha512-lSTdRvCNmsz93/g73d5JdcQIxYXW8XEUazfxOfCbEXnH1i7vcrMzOTZGIkOpsr/RbBChfOxRs1B+zzFRUIKUOQ==
+
 "@rollup/plugin-node-resolve@^16.0.0":
   version "16.0.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-16.0.0.tgz#b1a0594661f40d7b061d82136e847354ff85f211"
