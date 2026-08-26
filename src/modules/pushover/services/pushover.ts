@@ -1,6 +1,7 @@
-import { MedusaError } from '@medusajs/utils'
+/// <reference types="@rokmohar/pushover-types" />
+import { MedusaError } from '@medusajs/framework/utils'
 import Pushover from 'pushover-notifications'
-import { PushoverOptions } from '../types'
+import { PushoverCallback, PushoverMessage, PushoverOptions } from '../types'
 
 export class PushoverService {
   private client: Pushover
@@ -13,7 +14,7 @@ export class PushoverService {
     })
   }
 
-  send(message: Pushover.Message, cb: Pushover.PushoverCallback) {
+  send(message: PushoverMessage, cb: PushoverCallback) {
     this.client.send(message, cb)
   }
 
