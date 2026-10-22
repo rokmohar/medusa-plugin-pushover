@@ -5,25 +5,42 @@ import { PushoverCallback, PushoverMessage, PushoverOptions } from '../types'
 
 export class PushoverService {
   private client: Pushover
+  private options: PushoverOptions
 
   constructor(_: any, options: Record<any, any>) {
-    const validOptions = this.toPluginOptions(options)
-    this.client = new Pushover({
-      user: validOptions.user_key,
-      token: validOptions.api_token,
-    })
+    this.options = this.toPluginOptions(options)
+    this.client = new Pushover({ user: '', token: '' })
   }
 
   send(message: PushoverMessage, cb: PushoverCallback) {
-    this.client.send(message, cb)
+    const user = message.user || this.options.user_key
+    const token = message.token || this.options.api_token
+
+    if (!user || !token) {
+      cb(
+        new MedusaError(
+          MedusaError.Types.INVALID_DATA,
+          'Pushover message needs `user` and `token`, set on the message or as `user_key` and `api_token` in the options',
+        ),
+        undefined,
+      )
+      return
+    }
+    this.client.send({ ...message, user, token }, cb)
   }
 
   static validateOptions(options: Record<any, any>) {
-    if (!options.user_key) {
-      throw new MedusaError(MedusaError.Types.INVALID_DATA, 'Option `user_key` is required in the Pushover options')
+    if (options.user_key !== undefined && typeof options.user_key !== 'string') {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        'Option `user_key` must be a string in the Pushover options',
+      )
     }
-    if (!options.api_token) {
-      throw new MedusaError(MedusaError.Types.INVALID_DATA, 'Option `api_token` is required in the Pushover options')
+    if (options.api_token !== undefined && typeof options.api_token !== 'string') {
+      throw new MedusaError(
+        MedusaError.Types.INVALID_DATA,
+        'Option `api_token` must be a string in the Pushover options',
+      )
     }
   }
 

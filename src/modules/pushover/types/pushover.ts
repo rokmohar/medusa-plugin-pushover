@@ -1,13 +1,13 @@
 export interface PushoverOptions {
   /**
-   * Pushover User Key
+   * Pushover User Key. Default for messages without `user`.
    */
-  user_key: string
+  user_key?: string
 
   /**
-   * Pushover API Token
+   * Pushover API Token. Default for messages without `token`.
    */
-  api_token: string
+  api_token?: string
 }
 
 /**
@@ -27,12 +27,12 @@ export interface PushoverMessage {
   message: string
 
   /**
-   * The API token. Defaults to the token the plugin was configured with.
+   * The API token. Defaults to the plugin's `api_token`; required when none is configured.
    */
   token?: string
 
   /**
-   * The user key. Defaults to the user key the plugin was configured with.
+   * The user key. Defaults to the plugin's `user_key`; required when none is configured.
    */
   user?: string
 

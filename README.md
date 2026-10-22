@@ -44,7 +44,9 @@ module.exports = defineConfig({
 })
 ```
 
-Both options are required. The plugin throws a `MedusaError` on startup if either is missing.
+Both options are optional defaults: a message's own `user` and `token` take precedence (see
+[Overriding recipient and application](#overriding-recipient-and-application)). If a message ends up without a user or a
+token, `send` passes a `MedusaError` to the callback.
 
 ## ENV variables
 
@@ -87,6 +89,21 @@ export const config: SubscriberConfig = {
 
 `send` takes the [Pushover message object](https://pushover.net/api) (`message` is required; `title`, `priority`,
 `sound`, `url`, `device` and the rest are optional) and a Node-style callback.
+
+### Overriding recipient and application
+
+Set `user` and/or `token` on a message to override the configured `user_key` and `api_token`, e.g. to notify several
+users:
+
+```ts
+for (const userKey of ['uQiRzpo4DXghDmr9QzzfQu27cmVRsG', 'gznej3rKEVAvPUxu9vvNnqpmZpokzF']) {
+  pushoverService.send({ user: userKey, message: 'New order' }, (err) => {
+    if (err) {
+      console.error(err)
+    }
+  })
+}
+```
 
 The `PushoverMessage`, `PushoverCallback` and `PushoverOptions` types are exported from the plugin root:
 
