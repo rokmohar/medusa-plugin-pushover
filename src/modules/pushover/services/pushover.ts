@@ -9,7 +9,8 @@ export class PushoverService {
 
   constructor(_: any, options: Record<any, any>) {
     this.options = this.toPluginOptions(options)
-    this.client = new Pushover({ user: '', token: '' })
+    // Errors are read from the response in send, the default handler throws outside the callback
+    this.client = new Pushover({ user: '', token: '', onerror: () => {} })
   }
 
   send(message: PushoverMessage, cb: PushoverCallback) {
@@ -26,7 +27,9 @@ export class PushoverService {
       )
       return
     }
-    this.client.send({ ...message, user, token }, cb)
+    this.client.send({ ...message, user, token }, (error, result) => {
+      cb(error || this.toResponseError(result), result)
+    })
   }
 
   static validateOptions(options: Record<any, any>) {
@@ -41,6 +44,19 @@ export class PushoverService {
         MedusaError.Types.INVALID_DATA,
         'Option `api_token` must be a string in the Pushover options',
       )
+    }
+  }
+
+  private toResponseError(result: unknown): Error | null {
+    try {
+      const response = typeof result === 'string' ? JSON.parse(result) : result
+      if (response?.status === 1) {
+        return null
+      }
+      const errors = Array.isArray(response?.errors) ? response.errors.join(', ') : 'Unknown error'
+      return new MedusaError(MedusaError.Types.UNEXPECTED_STATE, `Pushover request failed: ${errors}`)
+    } catch {
+      return new MedusaError(MedusaError.Types.UNEXPECTED_STATE, 'Pushover returned an invalid response')
     }
   }
 

@@ -46,7 +46,8 @@ module.exports = defineConfig({
 
 Both options are optional defaults: a message's own `user` and `token` take precedence (see
 [Overriding recipient and application](#overriding-recipient-and-application)). If a message ends up without a user or a
-token, `send` passes a `MedusaError` to the callback.
+token, `send` passes a `MedusaError` to the callback. Errors returned by the Pushover API, such as an invalid user key,
+are passed to the callback the same way.
 
 ## ENV variables
 

@@ -1,6 +1,6 @@
 {
   "name": "@rokmohar/medusa-plugin-pushover",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Pushover plugin for Medusa 2",
   "author": "Rok Mohar",
   "license": "MIT",
