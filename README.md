@@ -14,11 +14,13 @@ Or with **yarn**:
 yarn add @rokmohar/medusa-plugin-pushover
 ```
 
-## ⚠️ MedusaJS v2.19.0 or newer
+## ⚠️ MedusaJS v2.23.0 or newer
 
-This plugin is only for MedusaJS v2.19.0 or newer.
+This plugin is only for MedusaJS v2.23.0 or newer.
 
-If you are using an older version of MedusaJS, please use the [v0.1.2 version of this plugin](https://github.com/rokmohar/medusa-plugin-pushover/tree/v0.1.2).
+If you are using MedusaJS v2.19.0 to v2.22.x, please use the [v0.3.1 version of this plugin](https://github.com/rokmohar/medusa-plugin-pushover/tree/v0.3.1).
+
+For older versions of MedusaJS, please use the [v0.1.2 version of this plugin](https://github.com/rokmohar/medusa-plugin-pushover/tree/v0.1.2).
 
 ## Configuration
 
